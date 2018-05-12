@@ -40,15 +40,18 @@
       <form class="navbar-form navbar-left">
 
         <div class="input-group date" id="datepicker">
-          <input type="text" class="form-control" name="inputdate" id="inputdate">
+          <input type="text" class="form-control" name="inputdate" id="inputdate" />
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-th"></i>
           </span>
         </div>
 
-        <button class="btn btn-default" data-toggle="button" aria-pressed="false">查看</button>
-        <button class="btn btn-primary" data-toggle="button" aria-pressed="false">执行上传</button>
-        <button class="btn btn-danger" data-toggle="button" aria-pressed="false">重新生成</button>
+        <button class="btn btn-default" data-toggle="button" aria-pressed="false" id="btn-review">查看</button>
+        <button class="btn btn-primary" data-toggle="button" aria-pressed="false" id="btn-upload">执行上传</button>
+        <button class="btn btn-danger" data-toggle="button" aria-pressed="false" id="btn-generate">重新生成</button>
+
+        <input type="hidden" name="user-action" id="user-action" />
+        <input type="hidden" name="user-confirm" id="user-confirm" />
       </form>
     </div>
     <div class="tabs-bar">
@@ -127,6 +130,48 @@
       </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-notice">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">操作提示</h4>
+          </div>
+          <div class="modal-body">
+            <p class="modal-body-text">日期不能为空，请返回重新选择。</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-confirm">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">操作确认</h4>
+          </div>
+          <div class="modal-body">
+            <p class="modal-body-text">您确定要继续进行操作吗？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="modal-btn-confirm">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal -->
   </div>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -137,9 +182,11 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
   <!-- Optional JavaScript -->
   <script lang="JavaScript">
     $(document).ready(function () {
+      // Init DatePicker component
       $('#datepicker').datepicker({
         format: "yyyy/mm/dd",
         startDate: "2018/05/10",
@@ -158,8 +205,66 @@
       //   console.log($('#datepicker').datepicker('getFormattedDate'));
       // });
       $('#datepicker').datepicker("setDate", "-1d");
-      // console.log($("#inputdate").val());
-      // console.log("document ready!");
+
+      // Init button events
+      $("#btn-review").click(function () {
+        if(!$("#inputdate").val()){
+          $("#modal-notice").modal("show");
+          return false;
+        }
+
+        console.log("review data for date '%s'", $("#inputdate").val());
+      });
+
+      $("#btn-upload").click(function () {
+        if(!$("#inputdate").val()){
+          $("#modal-notice").modal("show");
+          return false;
+        }
+
+        $("#user-action").val("upload");
+        $("#modal-confirm").modal("show");
+
+        console.log("upload data for date '%s'", $("#inputdate").val());
+      });
+
+      $("#btn-generate").click(function () {
+        if(!$("#inputdate").val()){
+          $("#modal-notice").modal("show");
+          return false;
+        }
+
+        $("#user-action").val("generate");
+        $("#modal-confirm").modal("show");
+
+        console.log("regenerate data for date '%s'", $("#inputdate").val());
+      });
+
+      //Init modal component
+      $('#modal-confirm').on('show.bs.modal', function (event) {
+        // var button = $(event.relatedTarget) // Button that triggered the modal
+        // var recipient = button.data('whatever') // Extract info from data-* attributes
+        var recipient = $("#user-action").val();
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        console.log(recipient);
+        switch (recipient) {
+          case "upload":
+            modal.find('.modal-title').text("操作确认")
+            modal.find('.modal-body .modal-body-text').text("即将进行接口文件上传，点击【确认】继续。");
+            break;
+          case "generate":
+            modal.find('.modal-title').text("操作确认")
+            modal.find('.modal-body .modal-body-text').text("即将进行接口数据重新生成，点击【确认】继续。");
+            break;
+          default:
+            break;
+        }
+        $("#user-action").val("");
+        // console.log($("#triggered-by").val())
+      })
+
     })
   </script>
 
