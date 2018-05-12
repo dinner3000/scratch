@@ -13,15 +13,16 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
     crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.min.css">
+
   <style>
     .container {
-      margin: 50px;
+      padding-top: 50px;
     }
 
     .command-bar {
       margin-top: 30px;
+      overflow: hidden;
     }
 
     .tabs-bar {
@@ -32,38 +33,39 @@
 </head>
 
 <body>
-
-  
   <div class="container">
     <h1>互金协会数据报送控制面板</h1>
 
     <div class="command-bar">
       <form class="navbar-form navbar-left">
-          <div class="input-group date" data-provide="datepicker">
-              <input type="text" class="form-control">
-              <div class="input-group-addon">
-                  <span class="glyphicon glyphicon-th"></span>
-              </div>
-          </div>
-        <button class="btn btn-primary" data-toggle="button" aria-pressed="false">生成</button>
-        <button class="btn btn-primary" data-toggle="button" aria-pressed="false">上传</button>
+
+        <div class="input-group date" id="datepicker">
+          <input type="text" class="form-control" name="inputdate" id="inputdate">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-th"></i>
+          </span>
+        </div>
+
+        <button class="btn btn-default" data-toggle="button" aria-pressed="false">查看</button>
+        <button class="btn btn-primary" data-toggle="button" aria-pressed="false">执行上传</button>
+        <button class="btn btn-danger" data-toggle="button" aria-pressed="false">重新生成</button>
       </form>
     </div>
     <div class="tabs-bar">
       <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#proj" data-toggle="tab">项目信息</a>
+        <li role="presentation" class="active">
+          <a href="#proj" aria-controls="proj" role="tab" data-toggle="tab">项目信息</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#bor" data-toggle="tab">借款人信息</a>
+        <li role="presentation">
+          <a href="#bor" aria-controls="bor" role="tab" data-toggle="tab">借款人信息</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#inv" data-toggle="tab">出借人信息</a>
+        <li role="presentation">
+          <a href="#inv" aria-controls="inv" role="tab" data-toggle="tab">出借人信息</a>
         </li>
       </ul>
     </div>
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade show active" id="proj">
+      <div role="tabpanel" class="tab-pane fade in active" id="proj">
         <table class="table">
           <thead>
             <tr>
@@ -83,7 +85,7 @@
           </tbody>
         </table>
       </div>
-      <div class="tab-pane fade" id="bor">
+      <div role="tabpanel" class="tab-pane fade" id="bor">
         <table class="table">
           <thead>
             <tr>
@@ -103,7 +105,7 @@
           </tbody>
         </table>
       </div>
-      <div class="tab-pane fade" id="inv">
+      <div role="tabpanel" class="tab-pane fade" id="inv">
         <table class="table">
           <thead>
             <tr>
@@ -133,17 +135,32 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
   <!-- Optional JavaScript -->
   <script lang="JavaScript">
-    $('.datepicker').datepicker({
-      format: 'yyyy/mm/dd',
-      defaultViewDate: '-1d',
-      startDate: '2018/05/10',
-      endDate: "-1d",
-      todayBtn: true
-    });
+    $(document).ready(function () {
+      $('#datepicker').datepicker({
+        format: "yyyy/mm/dd",
+        startDate: "2018/05/10",
+        endDate: "-1d",
+        daysOfWeekHighlighted: "0,6",
+        forceParse: true,
+        // defaultViewDate: "2018/05/11",
+        // startView: 1,
+        // todayBtn: true,
+        clearBtn: true,
+        language: "zh-CN",
+        autoclose: true,
+        todayHighlight: true
+      });
+      // $('#datepicker').on('changeDate', function () {
+      //   console.log($('#datepicker').datepicker('getFormattedDate'));
+      // });
+      $('#datepicker').datepicker("setDate", "-1d");
+      // console.log($("#inputdate").val());
+      // console.log("document ready!");
+    })
   </script>
 
 </body>
