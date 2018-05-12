@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+  <!-- Bootstrap CSS -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+ 
+  <style>
+    .container {
+      margin: 50px;
+    }
+
+    .command-bar {
+      margin-top: 30px;
+    }
+
+    .tabs-bar {
+      margin-top: 30px;
+    }
+  </style>
+  <title>互金协会数据报送控制面板</title>
+</head>
+
+<body>
+
+  
+  <div class="container">
+    <h1>互金协会数据报送控制面板</h1>
+
+    <div class="command-bar">
+      <form class="navbar-form navbar-left">
+          <div class="input-group date" data-provide="datepicker">
+              <input type="text" class="form-control">
+              <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-th"></span>
+              </div>
+          </div>
+        <button class="btn btn-primary" data-toggle="button" aria-pressed="false">生成</button>
+        <button class="btn btn-primary" data-toggle="button" aria-pressed="false">上传</button>
+      </form>
+    </div>
+    <div class="tabs-bar">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#proj" data-toggle="tab">项目信息</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#bor" data-toggle="tab">借款人信息</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#inv" data-toggle="tab">出借人信息</a>
+        </li>
+      </ul>
+    </div>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade show active" id="proj">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">项目</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="bor">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">借款人</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="inv">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">出借人</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+  <!-- Optional JavaScript -->
+  <script lang="JavaScript">
+    $('.datepicker').datepicker({
+      format: 'yyyy/mm/dd',
+      defaultViewDate: '-1d',
+      startDate: '2018/05/10',
+      endDate: "-1d",
+      todayBtn: true
+    });
+  </script>
+
+</body>
+
+</html>
