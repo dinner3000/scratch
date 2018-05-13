@@ -166,7 +166,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="modal-btn-confirm">确定</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-default" id="modal-btn-cancel" data-dismiss="modal">取消</button>
           </div>
         </div>
       </div>
@@ -183,6 +183,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  
   <!-- Optional JavaScript -->
   <script lang="JavaScript">
     $(document).ready(function () {
@@ -261,11 +263,50 @@
           default:
             break;
         }
+      })
+
+      $("#modal-btn-confirm").click(function(){
+        switch($("#user-action").val()){
+          case "upload":
+            break;
+          case "generate":
+            break;
+          default:
+            break;
+        }
+
         $("#user-action").val("");
-        // console.log($("#triggered-by").val())
+      })
+
+      $("#modal-btn-cancel").click(function(){
+        $("#user-action").val("");
       })
 
     })
+
+    function RestApiClient(){
+      this.getProjData = function(inputDate){
+
+      }
+
+      this.getBorData = function(inputDate){
+
+      }
+
+      this.getInvData = function(inputDate){
+
+      }
+
+      this.uploadFiles = function(inputDate){
+
+      }
+
+      this.regenerateData = function(inputDate){
+
+      }
+    }
+
+
   </script>
 
 </body>
